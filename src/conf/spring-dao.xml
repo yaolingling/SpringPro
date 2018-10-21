@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+    <!-- 使用注解时必须启动注解驱动 -->
+    <context:annotation-config />
+    <context:component-scan base-package="com.emc.example"/>
+
+    <bean name="accountDao" class="com.emc.example.dao.AccountDaoImpl"></bean>
+
+    <!-- 普通数据类型注入-->
+    <bean name="account" class="com.emc.example.dao.Account">
+        <property name="name" value="I am SpringIOC1" />
+        <property name="pwd" value="123" />
+        <!-- 注入map -->
+        <property name="books">
+            <map>
+                <entry key="10" value="CoreJava">
+                </entry>
+                <entry key="11" value="JavaWeb">
+                </entry>
+                <entry key="12" value="SSH2">
+                </entry>
+            </map>
+        </property>
+        <!-- 注入set -->
+        <property name="friends">
+            <set>
+                <value>张龙</value>
+                <value>老王</value>
+                <value>王五</value>
+            </set>
+        </property>
+        <!-- 注入list -->
+        <property name="citys">
+            <list>
+                <value>北京</value>
+                <value>上海</value>
+                <value>深圳</value>
+                <value>广州</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean name="user" class="com.emc.example.dao.User">
+        <constructor-arg  type="java.lang.String" value="Jack"/>
+        <constructor-arg  type="int" value="26"/>
+    </bean>
+
+    <bean id="userDao" class="com.emc.example.dao.UserDaoImpl"/>
+</beans>
